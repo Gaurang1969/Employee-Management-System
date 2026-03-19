@@ -29,4 +29,4 @@ Currently frontend-only. Backend integration with
 Node.js, Express, and MongoDB is in progress.
 
 ## Screenshots
-![Dashboard Preview](public/Gaurang_EMS_Project.png)
+![Dashboard Preview](Gaurang_EMS_Project.png)
