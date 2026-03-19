@@ -29,4 +29,4 @@ Currently frontend-only. Backend integration with
 Node.js, Express, and MongoDB is in progress.
 
 ## Screenshots
-![Dashboard Preview]("C:\Users\gashu\OneDrive\Desktop\EMS project\ems\image.png")
+![Dashboard Preview](EMS/Gaurang_EMS_Project.png)
