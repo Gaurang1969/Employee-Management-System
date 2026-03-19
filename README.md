@@ -18,7 +18,7 @@ React.js · Context API · Tailwind CSS · JavaScript · localStorage
 2. Run `npm install`
 3. Run `npm run dev`
 4. Open `http://localhost:5173` in your browser
-gi
+
 ## Project Structure
 - `/src/components` — Admin and Employee dashboard components
 - `/src/context` — AuthContext and TaskContext
@@ -27,3 +27,6 @@ gi
 ## Note
 Currently frontend-only. Backend integration with 
 Node.js, Express, and MongoDB is in progress.
+
+## Screenshots
+![Dashboard Preview](./public/Gaurang_EMS_Project.png)
