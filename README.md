@@ -30,3 +30,6 @@ Node.js, Express, and MongoDB is in progress.
 
 ## Screenshots
 ![Dashboard Preview](image.png)
+
+## Live Demo
+[Click here](https://employee-management-system-silk-rho.vercel.app)
