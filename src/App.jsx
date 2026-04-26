@@ -8,44 +8,47 @@ const App = () => {
 
   const [user, setUser] = useState(null)
   const [loggedInUserData, setLoggedInUserData] = useState(null)
-  const [userData,SetUserData] = useContext(AuthContext)
+  const [userData, SetUserData] = useContext(AuthContext)
 
-  useEffect(()=>{
+  useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser')
-    
-    if(loggedInUser){
+    if (loggedInUser) {
       const userData = JSON.parse(loggedInUser)
       setUser(userData.role)
       setLoggedInUserData(userData.data)
     }
+  }, [])
 
-  },[])
+  const handleLogin = async (email, password) => {
+    try {
+      const res = await fetch('https://ems-backend-ltfi.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
 
+      const data = await res.json();
 
-  const handleLogin = (email, password) => {
-    if (email == 'admin@gaurang69.com' && password == '123') {
-      setUser('admin')
-      localStorage.setItem('loggedInUser', JSON.stringify({ role: 'admin',data:{firstName:'Gaurang'} }))
-    } else if (userData) {
-      const employee = userData.find((e) => email == e.email && e.password == password)
-      if (employee) {
-        setUser('employee')
-        setLoggedInUserData(employee)
-        localStorage.setItem('loggedInUser', JSON.stringify({ role: 'employee',data:employee }))
-      }
+      if (!res.ok) return alert(data.message);
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('loggedInUser', JSON.stringify({
+        role: data.role,
+        data: { firstName: data.name }
+      }));
+
+      setUser(data.role);
+      setLoggedInUserData({ firstName: data.name });
+
+    } catch (err) {
+      alert("Server error, try again");
     }
-    else {
-      alert("Invalid Credentials")
-    }
-  }
-
-
+  };
 
   return (
-    
     <>
       {!user ? <Login handleLogin={handleLogin} /> : ''}
-      {user == 'admin' ? <AdminDashboard changeUser={setUser} data={loggedInUserData} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null) }
+      {user == 'admin' ? <AdminDashboard changeUser={setUser} data={loggedInUserData} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null)}
     </>
   )
 }
